@@ -333,7 +333,7 @@ function timeSinceCalculate(date) {
 }
 
 timeSince();
-// setInterval(timeSince, 1000);
+setInterval(timeSince, 1000);
 
 //something
 
