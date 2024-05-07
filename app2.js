@@ -222,14 +222,20 @@ function timeSince() {
 
     if (allNotesDemo.length) {
         allNotesDemo.map(function (note) {
-            let timeStampTag = document.getElementById(`timeStamp-${note.id}`);
-            timeStampTag.innerHTML = timeSinceCalculate(note.time);
+            //  check if the element is present and then proceed
+            if (null != document.getElementById(`timeStamp-${note.id}`)) {
+                let timeStampTag = document.getElementById(`timeStamp-${note.id}`);
+                timeStampTag.innerHTML = timeSinceCalculate(note.time);
+            }
         })
     }
     if (allNotes.length) {
         allNotes.map(function (note) {
-            let timeStampTag = document.getElementById(`timeStamp-${note.id}`);
-            timeStampTag.innerHTML = timeSinceCalculate(note.time);
+            //  check if the element is present and then proceed
+            if (null != document.getElementById(`timeStamp-${note.id}`)) {
+                let timeStampTag = document.getElementById(`timeStamp-${note.id}`);
+                timeStampTag.innerHTML = timeSinceCalculate(note.time);
+            }
         })
     }
 }
@@ -241,25 +247,25 @@ function timeSinceCalculate(date) {
     var interval = seconds / 31536000;
 
     if (interval > 1) {
-        return (Math.floor(interval)>1)? `${Math.floor(interval)} years ago` : `${Math.floor(interval)} year ago`;
+        return (Math.floor(interval) > 1) ? `${Math.floor(interval)} years ago` : `${Math.floor(interval)} year ago`;
     }
     interval = seconds / 2592000;
     if (interval > 1) {
-        return (Math.floor(interval)>1)? `${Math.floor(interval)} months ago` : `${Math.floor(interval)} month ago`;
+        return (Math.floor(interval) > 1) ? `${Math.floor(interval)} months ago` : `${Math.floor(interval)} month ago`;
     }
     interval = seconds / 86400;
     if (interval > 1) {
-        return (Math.floor(interval)>1)? `${Math.floor(interval)} days ago` : `${Math.floor(interval)} day ago`;
+        return (Math.floor(interval) > 1) ? `${Math.floor(interval)} days ago` : `${Math.floor(interval)} day ago`;
     }
     interval = seconds / 3600;
     if (interval > 1) {
-        return (Math.floor(interval)>1)? `${Math.floor(interval)} hours ago` : `${Math.floor(interval)} hour ago`;
+        return (Math.floor(interval) > 1) ? `${Math.floor(interval)} hours ago` : `${Math.floor(interval)} hour ago`;
     }
     interval = seconds / 60;
     if (interval > 1) {
-        return (Math.floor(interval)>1)? `${Math.floor(interval)} minutes ago` : `${Math.floor(interval)} minute ago`;
+        return (Math.floor(interval) > 1) ? `${Math.floor(interval)} minutes ago` : `${Math.floor(interval)} minute ago`;
     }
-    return (Math.floor(seconds)>1)? `${Math.floor(seconds)} seconds ago` : `${Math.floor(seconds)} second ago`;
+    return (Math.floor(seconds) > 1) ? `${Math.floor(seconds)} seconds ago` : `${Math.floor(seconds)} second ago`;
     // return Math.floor(seconds) + " seconds";
 }
 
