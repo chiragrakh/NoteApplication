@@ -2,6 +2,7 @@
 
 let allNotes = [];
 
+// mock data
 const allNotesDemo = [
     {
         id: 100,
@@ -20,6 +21,7 @@ const allNotesDemo = [
     },
 ];
 
+// 
 document.getElementById("addBtn").addEventListener("click", function () {
     const userText = document.getElementById("addText").value;
     document.getElementById("addText").value = "";
@@ -104,12 +106,15 @@ function displayItems(newNote) {
         itemRow = document.createElement("div");
         itemRow.id = `note-${newNote.id}`;
         itemRow.classList.add(
-            "h-30",
-            "w-36",
+            "h-fit",
+            "w-40",
             "bg-white",
             "drop-shadow-lg",
             "rounded-lg",
-            "overflow-hidden"
+            "overflow-hidden",
+            "grow",
+            "min-[450px]:w-36",
+            "min-[554px]:grow-0",
         );
     }
 
@@ -126,12 +131,8 @@ function displayItems(newNote) {
         "text-blue-900",
     );
 
-    const itemOperations = document.createElement("div");
-    itemOperations.classList.add("flex", "justify-end", "p-2");
-    // display: flex;
-    // flex-wrap: wrap;
-    // flex-direction: row;
-    // justify-content: flex-end;
+    const bottomBar = document.createElement("div");
+    bottomBar.classList.add("flex", "justify-between", "p-2");
 
     const timeStampText = document.createElement("p");
     timeStampText.id = `timeStamp-${newNote.id}`;
@@ -145,6 +146,11 @@ function displayItems(newNote) {
     // )
     // const creationTimeStamp = new Date();
 
+    const noteOpereations = document.createElement("p");
+    noteOpereations.classList.add(
+        "flex",
+        "gap-px"
+    )
 
     const editBtn = document.createElement("button");
     editBtn.type = "button";
@@ -158,7 +164,7 @@ function displayItems(newNote) {
 
         // const itemTextContainer = document.createElement("div");
         textBox.classList.add(
-            "h-38",
+            "min-h-24",
             "w-full",
             "bg-transparent",
             "rounded-t-lg",
@@ -188,6 +194,7 @@ function displayItems(newNote) {
                     if(note.id === newNote.id) {
                         note.text = textBox.value;
                         note.time = new Date();
+                        localStorage.setItem(key, JSON.stringify(note));
                     }
                   });
                 itemRow.innerHTML = "";
@@ -233,10 +240,11 @@ function displayItems(newNote) {
 
     itemTextContainer.appendChild(itemText);
     itemRow.appendChild(itemTextContainer);
-    itemOperations.appendChild(timeStampText);
-    itemOperations.appendChild(editBtn);
-    itemOperations.appendChild(deleteBtn);
-    itemRow.appendChild(itemOperations);
+    bottomBar.appendChild(timeStampText);
+    noteOpereations.appendChild(editBtn);
+    noteOpereations.appendChild(deleteBtn);
+    bottomBar.appendChild(noteOpereations)
+    itemRow.appendChild(bottomBar);
     if (!document.getElementById(`note-${newNote.id}`)) {
         mainContainer.appendChild(itemRow);
     }
@@ -333,12 +341,4 @@ function timeSinceCalculate(date) {
 }
 
 timeSince();
-setInterval(timeSince, 1000);
-
-//something
-
-// function localStorageDisplay() {
-//     for (const key in localStorage) {
-//         console.log(key, localStorage[key]);
-//     }
-// }
+// setInterval(timeSince, 1000);
